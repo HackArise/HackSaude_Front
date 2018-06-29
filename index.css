@@ -2,6 +2,51 @@ body {
     margin: 0;
 }
 
+.div-perfil {
+  height: 10vh;
+  background-color: #2980b9;
+  display: flex;
+  flex-direction: column;
+}
+
+.div-menu-header {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0px;
+  background-color: red;
+  margin: 0;
+  width: 50%;
+  height: 100%;
+  align-self: flex-end;
+}
+
+.btn-menu-header-sino{
+  background-color: yellow;
+  border: none;
+}
+
+.btn-menu-header-perfil{
+  border: none;
+
+}
+
+
+.img-menu-header-sino {
+  vertical-align: center;
+  width: 40px;
+  height: 40px;
+}
+
+.img-menu-header-perfil {
+  vertical-align: center;
+  width: 60px ;
+  height: 60px ;
+}
+
+.navigation{
+  height: 0px;
+}
+
 #main-map {
 
     height: 80vh;
@@ -60,8 +105,8 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 5%;
-    padding-left: 5%
+    padding-top: 1%;
+    padding-left: 1%;
 }
 
 .content {
@@ -131,7 +176,7 @@ a:hover {
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-  background: #2980b9;
+  background: white;
   border-radius: 3px;
   z-index: 1;
   transform-origin: 4px 0px;
@@ -166,7 +211,7 @@ a:hover {
 #menu {
   position: absolute;
   height: 100vh;
-  width: 10vw;
+  width: 15vw;
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
