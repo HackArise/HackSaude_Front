@@ -16,12 +16,16 @@ function createPoints() {
         let info = {
             labels: ["Neurocirurgião", "Dentista", "Ortopedista", "Fisioterapeuta", "Psicologista", "Médico geral"],
             data: [12, 19, 3, 5, 2, 3],
-            label: 'Quantidade de médicos'
+            label: 'Quantidade de médicos',
+            id: i
         };
         // static mark
-        let mark = L.marker([-15.8309 + i * 0.08, -47.9952 + i * 0.08]).addTo(mymap).on('click', function(e) {onMarkClick(e, info) });
+        let mark = L.marker([-15.8309 + i * 0.08, -47.9952 + i * 0.08]);
+        mark.bindPopup(`<canvas id='${i}'></canvas>`);
+        mark.addTo(mymap).on('click', function (e) { onMarkClick(e, info) });
+
         // saves everything in an array
-        let markInfo = 
+        let markInfo =
         {
             mark: mark,
             info: info
@@ -40,8 +44,9 @@ function onMarkClick(e, info) {
 
 
 function openChart(target, info) {
-    target.bindPopup(`<canvas id='${target._leaflet_id}'></canvas>`).openPopup();
-    let canvas = document.getElementById(target._leaflet_id);
+    target.closePopup();
+    target.openPopup();
+    let canvas = document.getElementById(info.id);
     let ctx = canvas.getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',
