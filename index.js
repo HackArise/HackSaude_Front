@@ -40,6 +40,7 @@ function onMarkClick(e, info) {
     console.log(e.target);
     console.log(info);
     openChart(e.target, info);
+    // open side menu info
 }
 
 
