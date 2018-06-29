@@ -1,0 +1,10 @@
+#main-map {
+    height: 550px;
+    width: 80vw;
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
