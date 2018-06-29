@@ -1,5 +1,10 @@
+//globals
+let points = [];
 let mymap = L.map('main-map')
     .setView([-15.8309716, -47.995262], 11.75);
+
+
+
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -8,7 +13,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1IjoibHVjYXNzc20iLCJhIjoiY2ppemZ2bmdxMDZxZjNrbHpzNW5mdGVzaSJ9.uUUJhzYZorS3ntEf1x4MPA'
 }).addTo(mymap);
 
-let points = [];
 
 function createPoints() {
     for (let i = 0; i < 3; i++) {
