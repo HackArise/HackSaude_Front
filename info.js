@@ -67,6 +67,6 @@ let medicInfo = [
         profession: "Cardiologista",
         journey : ['16:00', '20:00'],
         observation: "Bom histórico e atendimento",
-        pointId: 3
+        pointId: 3  
     }
 ]

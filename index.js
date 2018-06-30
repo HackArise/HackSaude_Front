@@ -13,7 +13,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 
 function createPoints(pointsInfo, medicInfo) {
-    console.log(pointsInfo);
     for (let i = 0; i < 3; i++) {
         // static info
         let info = {
@@ -59,7 +58,7 @@ function createMedicList(medicInfo, info) {
         console.log(medicInfo[i].pointId + " - " + info.id);
         if(medicInfo[i].pointId == info.id){
         let div = document.createElement('div');
-        div.class = 'medic-info';
+        div.className = 'medic-info';
         div.innerHTML =
             `
                 <ul>
