@@ -4,8 +4,6 @@ let mymap = L.map('main-map')
     .setView([-15.8309716, -47.995262], 11.75);
 
 
-
-
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -14,19 +12,20 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(mymap);
 
 
-function createPoints() {
+function createPoints(pointsInfo, medicInfo) {
+    console.log(pointsInfo);
     for (let i = 0; i < 3; i++) {
         // static info
         let info = {
-            labels: ["Neurocirurgião", "Dentista", "Ortopedista", "Fisioterapeuta", "Psicologista", "Médico geral"],
-            data: [12, 19, 3, 5, 2, 3],
-            label: 'Quantidade de médicos',
-            id: i
+            labels: pointsInfo[i].labels,
+            data: pointsInfo[i].data,
+            label: pointsInfo[i].label,
+            id: pointsInfo[i].id
         };
         // static mark
-        let mark = L.marker([-15.8309 + i * 0.08, -47.9952 + i * 0.08]);
-        mark.bindPopup(`<canvas id='${i}'></canvas>`);
-        mark.addTo(mymap).on('click', function (e) { onMarkClick(e, info) });
+        let mark = L.marker([pointsInfo[i].lat, pointsInfo[i].long]);
+        mark.bindPopup(`<canvas id='${pointsInfo[i].id}'></canvas>`);
+        mark.addTo(mymap).on('click', function (e) { onMarkClick(e, info, medicInfo) });
 
         // saves everything in an array
         let markInfo =
@@ -40,13 +39,45 @@ function createPoints() {
 
 
 
-function onMarkClick(e, info) {
+function onMarkClick(e, info, medicInfo) {
     console.log(e.target);
     console.log(info);
     openChart(e.target, info);
-    // open side menu info
+    createMedicList(medicInfo, info);
 }
 
+
+function createMedicList(medicInfo, info) {
+    let main = document.getElementById("main-panel");
+    main.innerHTML = "";
+    let header = document.createElement("h1");
+    header.innerHTML = "Informações";
+    main.appendChild(header);
+    console.log(medicInfo);
+
+    for (let i in medicInfo) {
+        console.log(medicInfo[i].pointId + " - " + info.id);
+        if(medicInfo[i].pointId == info.id){
+        let div = document.createElement('div');
+        div.class = 'medic-info';
+        div.innerHTML =
+            `
+                <ul>
+                    <li>${medicInfo[i].name}</li>
+                    <li>${medicInfo[i].profession}</li>
+                    <li>${medicInfo[i].journey[0] + " - " + medicInfo[i].journey[1]}</li>
+                    <li>${medicInfo[i].observation}</li>
+                </ul>
+                <div class="button-container">
+                    <a>Chat</a>
+                    <a href="https://www.rd.com/wp-content/uploads/2017/09/02_doctor_Insider-Tips-to-Choosing-the-Best-Primary-Care-Doctor_519507367_Stokkete.jpg"
+                    data-lightbox="image-1" data-title="Imagem de perfil">Visualizar</a>
+        `
+        main.appendChild(div);
+        }
+        
+    }
+}
 
 function openChart(target, info) {
     target.closePopup();
@@ -81,7 +112,7 @@ function openChart(target, info) {
         },
         options: {
             scales: {
-                yAxes: [{
+                xAxes: [{
                     ticks: {
                         beginAtZero: true
                     }
@@ -97,7 +128,7 @@ function openChart(target, info) {
 
 
 function startApp() {
-    createPoints();
+    createPoints(pointsInfo, medicInfo);
 }
 
 document.onload = startApp();
